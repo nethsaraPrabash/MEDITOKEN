@@ -67,11 +67,4 @@ public class Patient {
         System.out.println("Address: " + patient[2]);
         System.out.println("Email: " + patient[3]);
     }
-
-
-
-
-
-
-
 }

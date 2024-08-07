@@ -10,8 +10,4 @@ public class Node {
         this.next = null;
         this.patient = patient;
     }
-
-
-
-
 }
