@@ -54,6 +54,7 @@ class Hospital {
     constructor() {
         this.front = null;
         this.rear = null;
+        this.loadFromCookies();
     }
 
     isEmpty() {
@@ -68,6 +69,7 @@ class Hospital {
             this.rear.next = newNode;
             this.rear = newNode;
         }
+        this.saveToCookies();
     }
 
     removePatient() {
@@ -78,6 +80,7 @@ class Hospital {
             if (this.front === null) {
                 this.rear = null;
             }
+            this.saveToCookies();
         }
     }
 
@@ -105,6 +108,75 @@ class Hospital {
             }
         }
     }
+
+    saveToCookies() {
+        let patients = [];
+        let temp = this.front;
+        while (temp !== null) {
+            patients.push(temp.patient);
+            temp = temp.next;
+        }
+        document.cookie = `hospitalQueue=${JSON.stringify(patients)}; path=/;`;
+    }
+
+    loadFromCookies() {
+        const cookies = document.cookie.split('; ').find(row => row.startsWith('hospitalQueue='));
+        if (cookies) {
+            const patients = JSON.parse(cookies.split('=')[1]);
+            patients.forEach(patientData => {
+                this.addPatient(patientData);
+            });
+        }
+    }
+
+    displayCount() {
+        const patientList = document.getElementById('patientList');
+        patientList.innerHTML = '';
+
+        if (this.isEmpty()) {
+            patientList.innerHTML = '<p>Queue is empty</p>';
+        } else {
+            let count = 0;
+            let temp = this.front;
+            while (temp !== null) {
+                temp = temp.next;
+                count++;
+            }
+            const patientDiv = document.createElement('div');
+            patientDiv.classList.add('mb-4', 'p-4', 'bg-gray-100', 'rounded', 'shadow');
+            patientDiv.innerHTML = `
+                    <h4 class="text-lg font-semibold">Patient ${count} added</h4>
+                `;
+                patientList.appendChild(patientDiv);
+
+        }
+    }
 }
 
 const hospital = new Hospital();
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetch("HTML/Manage.html")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("content").innerHTML = data;
+
+            document.getElementById('patientForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const patient = new Patient();
+                patient.setName(document.getElementById('name').value);
+                patient.setAge(document.getElementById('age').value);
+                patient.setAddress(document.getElementById('address').value);
+                patient.setEmail(document.getElementById('email').value);
+
+                hospital.addPatient(patient.getPatient());
+                hospital.display();
+
+                document.getElementById('patientForm').reset();
+            });
+
+            hospital.display();
+        })
+        .catch(error => console.error('Error loading Manage.html:', error));
+});
