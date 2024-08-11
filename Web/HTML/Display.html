@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load HTML Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-blue-50">
 
-    <section>
-
-    <header class="bg-red space-y-8 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-slate-1200">Patients List</h2>
+    <section class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <header class="bg-blue-600 text-white p-6 rounded-lg shadow-md mb-8">
+            <div class="flex items-center justify-between">
+                <h2 class="text-2xl font-semibold">Patients List</h2>
+            </div>
+        </header>
+        <div id="patientList" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         </div>
-    </header>
-    <div id="patientList" class="grid grid-cols-4 gap-4 md:grid-cols-6 sm:grid-cols-9"></div>
-
     </section>
 
-    
 </body>
 </html>

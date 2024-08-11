@@ -13,6 +13,33 @@ function loadPage(url, callback) {
 }
 
 
+// function setupManagePage() {
+//   document.getElementById('patientForm').addEventListener('submit', function(event) {
+//       event.preventDefault();
+
+//       const patient = new Patient();
+//       patient.setName(document.getElementById('name').value);
+//       patient.setAge(document.getElementById('age').value);
+//       patient.setAddress(document.getElementById('address').value);
+//       patient.setEmail(document.getElementById('email').value);
+
+//       hospital.addPatient(patient.getPatient());
+//       hospital.displayCount();
+
+//       document.getElementById('patientForm').reset();
+//   });
+
+//   document.getElementById('displayPatients').addEventListener('click', function(event) {
+//       event.preventDefault();
+
+//       window.history.pushState({page: "DisplayPatients"}, "", "/display");
+
+//       loadPage('HTML/Display.html', setupDisplayPage);
+//   });
+
+//   hospital.displayCount();
+// }
+
 function setupManagePage() {
   document.getElementById('patientForm').addEventListener('submit', function(event) {
       event.preventDefault();
@@ -31,8 +58,6 @@ function setupManagePage() {
 
   document.getElementById('displayPatients').addEventListener('click', function(event) {
       event.preventDefault();
-
-      window.history.pushState({page: "DisplayPatients"}, "", "/display");
 
       loadPage('HTML/Display.html', setupDisplayPage);
   });
