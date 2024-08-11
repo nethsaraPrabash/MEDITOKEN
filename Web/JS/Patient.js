@@ -1,3 +1,4 @@
+
 class Node {
     constructor(patient) {
         this.patient = patient;
@@ -62,14 +63,36 @@ class Hospital {
     }
 
     addPatient(patient) {
+        let count = 1;
         const newNode = new Node(patient);
         if (this.isEmpty()) {
             this.front = this.rear = newNode;
         } else {
+            let temp = this.front;
+            while (temp !== null) {
+                count++;
+                temp = temp.next;
+            }
             this.rear.next = newNode;
             this.rear = newNode;
         }
         this.saveToCookies();
+        this.sendEmail(patient, count);
+    }
+
+    sendEmail(patient, queueNumber)
+    {
+        const templateParams = {
+            name: patient[0],
+            to_email: patient[3],
+            patientNumber: queueNumber
+        };
+
+        emailjs.send('service_cgu4bze', 'template_swr0g5r', templateParams).then((response) => {
+            console.log('Email sent!', response.status, response.text);
+        }, (error) => {
+            console.error('Error sending email:', error);
+        });
     }
 
     removePatient() {
@@ -151,6 +174,8 @@ class Hospital {
 
         }
     }
+
+
 }
 
 const hospital = new Hospital();

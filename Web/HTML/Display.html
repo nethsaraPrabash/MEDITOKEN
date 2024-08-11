@@ -7,17 +7,13 @@
 </head>
 <body>
 
-    <section>
+    <div class="flex flex-col items-center">
+        <h1 class="text-center mb-4">Patients List</h1>
+    </div>
 
-    <header class="bg-red space-y-8 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
-        <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-slate-1200">Patients List</h2>
-        </div>
-    </header>
-    <div id="patientList" class="grid grid-cols-4 gap-4 md:grid-cols-6 sm:grid-cols-9"></div>
 
-    </section>
+    <div id="patientList" class="grid grid-cols-3 gap-4 content-start h-56"></div>
 
-    
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </body>
 </html>
