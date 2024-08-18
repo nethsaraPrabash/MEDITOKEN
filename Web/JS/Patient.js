@@ -88,7 +88,7 @@ class Hospital {
             patientNumber: queueNumber
         };
 
-        emailjs.send('service_cgu4bze', 'template_swr0g5r', templateParams).then((response) => {
+        emailjs.send('Your_Service_key', 'Your_template_key', templateParams).then((response) => {
             console.log('Email sent!', response.status, response.text);
         }, (error) => {
             console.error('Error sending email:', error);
